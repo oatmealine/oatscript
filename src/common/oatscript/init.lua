@@ -5,6 +5,7 @@ local preprocessing = internals.preprocessing
 local outputs = {}
 internals.outputs = outputs
 -- dumb hack
+-- TODO: don't do dumb hacks
 if not preprocessing then
   internals.api.outputs = outputs
 end

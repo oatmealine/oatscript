@@ -37,23 +37,17 @@ local nullTransform = {
 }
 
 function self.lock()
-  print('locking mod registries')
   assertMod()
   for outtype, entries in pairs(self.outputs) do
-    print('out type ' .. outtype)
     if outtype == 'items' then
       for _, item in ipairs(entries) do
         ---@type Collectible
         local item = item
         local id = Isaac.GetItemIdByName(item.name)
 
-        print('hewwo item ' .. item.name .. ' (' .. id .. ')')
-
         mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, function(_, player)
-          print('cache')
           for i = 1, player:GetCollectibleNum(id) do
             for field in pairs(item.stats.modifiedFields) do
-              print(field)
               local playerField = statSetToPlayerField[field]
               local transform = statSetTransforms[field] or nullTransform
               player[playerField] = transform.to(transform.from(player[playerField]) * item.stats[field].multiply + item.stats[field].add)
