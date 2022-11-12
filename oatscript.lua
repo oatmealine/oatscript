@@ -47,10 +47,14 @@ local function build(dir)
   package.path = oldPackagePath
   print = oldPrint
 
+  package.preload['dummy-api'] = nil
+  package.preload['test.main'] = nil
+  package.preload['oatscript-internals'] = nil
+
   lfs.mkdir('dist')
   lfs.mkdir('dist/content')
 
-  for filename, entries in pairs(internals.outputs) do
+  for filename, entries in pairs(internals.shared.getOutputs()) do
     local outDoc
     if filename == 'items' then
       local out = {}
@@ -84,8 +88,10 @@ local function build(dir)
   end
 
   os.execute('cp -r test/* dist/')
+  os.execute('rm -r dist/oatscript')
   os.execute('cp -r src/common/oatscript dist/oatscript')
-  os.execute('cp -r src/lib/oatscript-internals dist/oatscript-internals')
+  os.execute('rm -r dist/oatscript-internals')
+  os.execute('cp -r src/lib/oatscript-internals dist/')
 
   term.cursor.goleft(100)
   io.write('building... ' .. colors.green .. 'done!' .. colors.reset .. '\n')

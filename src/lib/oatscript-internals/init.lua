@@ -1,11 +1,21 @@
 local self = {}
+local shared = {}
 
 local mod = m
 function self.setMod(m)
   mod = m
 end
 
-self.outputs = {}
+local outputs = {}
+
+function shared.output(name, thing)
+  if not outputs[name] then outputs[name] = {} end
+  table.insert(outputs[name], thing)
+end
+
+function shared.getOutputs()
+  return outputs
+end
 
 local function assertMod()
   if not mod then
@@ -38,7 +48,7 @@ local nullTransform = {
 
 function self.lock()
   assertMod()
-  for outtype, entries in pairs(self.outputs) do
+  for outtype, entries in pairs(outputs) do
     if outtype == 'items' then
       for _, item in ipairs(entries) do
         ---@type Collectible
@@ -61,6 +71,6 @@ end
 
 return {
   preprocessing = false,
-  outputs = outputs,
-  api = self
+  api = self,
+  shared = shared
 }

@@ -2,18 +2,6 @@ local self = {}
 local internals = require('oatscript-internals.init')
 
 local preprocessing = internals.preprocessing
-local outputs = {}
-internals.outputs = outputs
--- dumb hack
--- TODO: don't do dumb hacks
-if not preprocessing then
-  internals.api.outputs = outputs
-end
-
-local function output(name, thing)
-  if not outputs[name] then outputs[name] = {} end
-  table.insert(outputs[name], thing)
-end
 
 local mod
 function self.setMod(m)
@@ -130,8 +118,7 @@ function self.Collectible(prop)
 
   local this = setmetatable(prop, collectibleMeta)
 
-  print('outputted Item..')
-  output('items', this)
+  internals.shared.output('items', this)
 
   return this
 end
