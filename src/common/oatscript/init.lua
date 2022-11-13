@@ -93,6 +93,11 @@ local function StatSet()
   }, {__index = statSetMeta})
 end
 
+---@class Callback
+---@field name string
+---@field func function
+---@field args any[]
+
 ---@class Collectible @represents a Collectible
 ---@field name string
 ---@field description string
@@ -100,10 +105,16 @@ end
 ---@field quality number
 ---@field tags string[]
 ---@field stats StatSet
+---@field id integer?
+---@field _callbacks table<string, Callback>
 local collectible = {}
 
 function collectible:on(callback, func, ...)
-  -- dummy
+  table.insert(self._callbacks, {
+    name = callback,
+    func = func,
+    args = {...}
+  })
 end
 
 local collectibleMeta = {}
@@ -115,6 +126,7 @@ function self.Collectible(prop)
   if not prop.name then error('cannot operate on an item without a name', 2) end
 
   prop.stats = StatSet()
+  prop._callbacks = {}
 
   local this = setmetatable(prop, collectibleMeta)
 
