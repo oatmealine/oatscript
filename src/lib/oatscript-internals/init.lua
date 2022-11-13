@@ -78,6 +78,14 @@ local statSetToPlayerField = {
   shotSpeed = 'ShotSpeed',
   luck = 'Luck'
 }
+local statSetToCacheFlag = {
+  speed = CacheFlag.CACHE_SPEED,
+  tears = CacheFlag.CACHE_FIREDELAY,
+  damage = CacheFlag.CACHE_DAMAGE,
+  range = CacheFlag.CACHE_RANGE,
+  shotSpeed = CacheFlag.CACHE_SHOTSPEED,
+  luck = CacheFlag.CACHE_LUCK
+}
 local statSetTransforms = {
   tears = {
     from = function(fireDelay)
@@ -131,12 +139,14 @@ end
 local function processItem(item)
   item.id = Isaac.GetItemIdByName(item.name)
 
-  mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, function(_, player)
+  mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, function(_, player, cacheFlag)
     for i = 1, player:GetCollectibleNum(item.id) do
       for field in pairs(item.stats.modifiedFields) do
-        local playerField = statSetToPlayerField[field]
-        local transform = statSetTransforms[field] or nullTransform
-        player[playerField] = transform.to(transform.from(player[playerField]) * item.stats[field].multiply + item.stats[field].add)
+        if cacheFlag == statSetToCacheFlag[field] then
+          local playerField = statSetToPlayerField[field]
+          local transform = statSetTransforms[field] or nullTransform
+          player[playerField] = transform.to(transform.from(player[playerField]) * item.stats[field].multiply + item.stats[field].add)
+        end
       end
     end
   end)
