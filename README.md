@@ -63,14 +63,16 @@ Once the preprocessor step is done, the internals are swapped out for production
 
 You'll need Lua and LuaRocks installed. Run this to install dependencies:
 ```sh
-luarocks build --no-project --local ./oatscript-prototype-1.rockspec
+$ luarocks build --no-project --local ./oatscript-prototype-1.rockspec
 ```
 Then you use the CLI oatscript tool:
 ```sh
-./oatscript.lua build
+$ ./oatscript.lua build
+$ # or
+$ lua oatscript.lua build
 ```
 Everything in `test/` will be the input; `dist/` is the output. Currently you cannot run the tool outside of the repository; this will be changed soon enough. (I think you can tell quite clearly by this that it's not quite meant for production use.)
 
 ## I don't like your design decisions!
 
-Come talk to me about it! I'm very open to feedback and changing things as people prefer rather than how I prefer it. oatscript lives at a tiny post under the `#hub` channel in the [Modding of Isaac Discord guild](https://discord.gg/pDBw5R5VKZ). Or otherwise, you can make an issue here.
+Come talk to me about it! I'm very open to feedback and changing things as people prefer rather than how I prefer it. oatscript lives at [a tiny post](https://discord.com/channels/962027940131008653/1040795686255464538) on the `#hub` channel in the [Modding of Isaac Discord guild](https://discord.gg/pDBw5R5VKZ). Or you can make an issue here. Whichever one you prefer.
