@@ -1,0 +1,35 @@
+-- typings equivalent to XML files
+-- see: https://github.com/wofsauge/isaac-xml-validator/tree/main/xsd
+
+---@class CollectibleXML
+---@field name string
+---@field gfx string
+---@field description string
+---@field tags string[]
+-- TODO
+-- ---@field cache string[]
+-- TODO (autoassign maybe?)
+-- ---@field id integer
+---@field hearts integer
+---@field maxhearts integer
+---@field keys integer
+---@field coins integer
+---@field bombs integer
+---@field achievement integer
+---@field special boolean
+---@field maxcharges integer
+---@field hidden boolean
+---@field soulhearts integer
+---@field devilprice integer
+---@field blackhearts integer
+---@field addcostumeonpickup boolean
+---@field cooldown integer
+---@field persistent boolean
+---@field quality integer
+---@field passivecache boolean
+-- TODO make this better
+---@field chargetype string
+---@field initcharge integer
+---@field shopprice integer
+---@field discharged boolean
+---@field craftquality integer

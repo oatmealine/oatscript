@@ -120,6 +120,9 @@ end
 local collectibleMeta = {}
 collectibleMeta.__index = collectible
 
+-- Creates a collectible; uses `items.xml`
+---@see https://github.com/wofsauge/isaac-xml-validator/blob/main/xsd/items.xsd
+---@param prop CollectibleXML
 ---@return Collectible
 function self.Collectible(prop)
   if not type(prop) == 'table' then error('expected table, got a.. ' .. type(prop) .. '??', 2) end

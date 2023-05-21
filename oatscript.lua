@@ -64,11 +64,33 @@ local function build(dir)
           out,
           xml.element(item.type or 'passive', {
             name = item.name,
-            description = item.description or '',
             gfx = item.gfx,
-            quality = item.quality,
+            description = item.description or '',
             tags = table.concat(item.tags or {}, ' '),
-            cache = item.stats:toCacheString()
+            cache = item.stats:toCacheString(),
+
+            hearts = item.hearts,
+            maxhearts = item.maxhearts,
+            keys = item.keys,
+            coins = item.coins,
+            bombs = item.bombs,
+            achievement = item.achievement,
+            special = item.special,
+            maxcharges = item.maxcharges,
+            hidden = item.hidden,
+            soulhearts = item.soulhearts,
+            devilprice = item.devilprice,
+            blackhearts = item.blackhearts,
+            addcostumeonpickup = item.addcostumeonpickup,
+            cooldown = item.cooldown,
+            persistent = item.persistent,
+            quality = item.quality,
+            passivecache = item.passivecache,
+            chargetype = item.chargetype,
+            initcharge = item.initcharge,
+            shopprice = item.shopprice,
+            discharged = item.discharged,
+            craftquality = item.craftquality
           }, {})
         )
       end
